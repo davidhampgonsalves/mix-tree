@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/dave/web2py/applications/init/controllers/authenticate.py'
+p4
+sS'code'
+p5
+S"from gluon.storage import Storage\nexec('from applications.%s.modules.gfc_auth import GFCUser' %request.application)\n\n#check if the current user is logged in\ndef index():\n\n    if not session.logged_in:\n        session.user = GFCUser.authenticate(mixtree_conf, request)\n        if session.user:\n            #create an auth session entry so that we can use the\n            #SimpleAuth.isLoggedIn method and other decorators\n            #based on gluon.Auth\n            session.logged_in = True\n    \n    return dict()\n\n\nresponse._vars=response._caller(index)\n"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/dave/web2py/gluon/restricted.py", line 184, in restricted\n    exec ccode in environment\n  File "/home/dave/web2py/applications/init/controllers/authenticate.py", line 18, in <module>\n  File "/home/dave/web2py/gluon/globals.py", line 102, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/dave/web2py/applications/init/controllers/authenticate.py", line 8, in index\n    session.user = GFCUser.authenticate(mixtree_conf, request)\n  File "/home/dave/web2py/applications/init/modules/gfc_auth.py", line 22, in authenticate\n    gfcUser = GFCUser(cookie.getValue())\nAttributeError: \'Morsel\' object has no attribute \'getValue\'\n'
+p8
+s.

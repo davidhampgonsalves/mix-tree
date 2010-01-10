@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/dave/web2py/applications/init/controllers/authenticate.py'
+p4
+sS'code'
+p5
+S"\n#check if the current user is logged in\ndef index():\n    #check for the gfc cookie\n    gfc_cookie = request.cookies['fcauth' + mixtreeConf.gfc_id]\n    if gfc_cookie:\n        #create an auth session entry so that we can use the\n        #Auth.isLoggedIn method and other decorators\n        session.auth = Storage(user='');\n    \n    return dict()\n\nresponse._vars=response._caller(index)\n"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/dave/web2py/gluon/restricted.py", line 184, in restricted\n    exec ccode in environment\n  File "/home/dave/web2py/applications/init/controllers/authenticate.py", line 13, in <module>\n  File "/home/dave/web2py/gluon/globals.py", line 102, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/dave/web2py/applications/init/controllers/authenticate.py", line 5, in index\n    gfc_cookie = request.cookies[\'fcauth\' + mixtreeConf.gfc_id]\nKeyError: \'fcauth\'\n'
+p8
+s.

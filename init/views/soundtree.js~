@@ -1,0 +1,6 @@
+
+getAudio = function(id)
+{
+	//make request to get audio
+	out {{= URL(r=request, c='audio_links', f='url_for_id')}}
+}

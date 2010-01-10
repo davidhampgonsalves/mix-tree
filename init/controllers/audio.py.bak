@@ -1,0 +1,70 @@
+import gluon.contrib.simplejson as sj
+
+resultsPerPage = 10
+
+def index(): 
+    '''displays the search and results pertaining to audio'''
+    #check page number and the criteria
+    searchCriteria = None
+    audio = []
+    page = 0
+    if len(request.args) > 0:
+        searchCriteria = request.args[0]
+        if len(request.args) == 2:
+            page = int(request.args[1])
+    
+    #create search form
+    formSearch = FORM(INPUT(_name='search', 
+            requires=[IS_NOT_EMPTY(error_message='you have to enter something to search for'),
+            IS_LENGTH(50, error_message='you can\'t have such a long search term, limit is 50 characters')]),
+            INPUT(_type='submit'), _action=URL(request.application, 'audio', 'index'), _method='get')
+
+    #handle form submits, which are search queries
+    if formSearch.accepts(request.vars):
+        searchCriteria = formSearch.vars.search
+
+    #get approperate records
+    if searchCriteria != None :
+        if request.env.web2py_runtime_gae:
+            pass    
+        else: 
+            audioByArtist = db.audio.search_field.like('%'+searchCriteria+'%')
+            audio = db(audioByArtist).select(limitby=(page*resultsPerPage, (page+1)*resultsPerPage + 1))
+
+    #create forward and back links
+    forward = ''
+    backward = ''
+
+    #not a perfect way to pagnate but its fast
+    if audio != None and len(audio) == resultsPerPage + 1 : 
+        forward = A('>>', _href=URL(r=request, args=[searchCriteria, page+1]))
+
+    #display back nav if not on 1st pg
+    if page > 0:
+        backward = A('<<', _href=URL(r=request, args=[searchCriteria, page-1]))
+
+    return dict(form_search=formSearch, audio=audio, forward=forward, backward=backward)
+
+def search():
+    '''returns the results in json to an audio search'''
+    page = 0
+    jsonResponse = {}
+    searchCriteria = None
+    
+    if len(request.args) > 0:
+        searchCriteria = request.args[0]
+        if len(request.args) == 2:
+            page = int(request.args[1])
+
+    #get approperate records
+    if searchCriteria:
+        audioByArtist = db.audio.artist_name.like('%'+searchCriteria+'%')
+        audio = db(audioByArtist).select(limitby=(page*resultsPerPage, (page+1)*resultsPerPage))
+        
+        jsonAudio = []
+        for a in audio:
+            jsonAudio.append( {'id':a.id, 'artist':a.artist_name, 'track':a.track_name} )
+        jsonResponse['audio'] = jsonAudio
+        jsonResponse['page'] = {'forward':'flag', 'back':'flag'}
+
+    return sj.dumps(jsonResponse)

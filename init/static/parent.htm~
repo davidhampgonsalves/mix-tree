@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title> static parent </title>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script language="javascript">
+
+			var mixListWin = null;
+			function addToMixList(id, type) 
+			{
+				var url = "mixList.htm";
+
+				mixListWin = window.open( "", "mixList", "width=500,height=400" );
+				if( !mixListWin || mixListWin.closed || !mixListWin.addMedia ) 
+				{
+					mixListWin = window.open( url, "mixList", "width=500,height=400" );
+					mixListWin.onload = function()
+					{
+						mixListWin.addMedia('123', '');
+					}
+				}else
+					mixListWin.addMedia('321', '');
+			} 
+			
+		</script>
+	</head>
+	
+	<body>
+		<a href="#" onclick="javascript:addToMixList('123')">add</a>
+	</body>
+</html>

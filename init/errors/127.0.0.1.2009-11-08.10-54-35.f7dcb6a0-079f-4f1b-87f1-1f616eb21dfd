@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/dave/web2py/applications/init/controllers/authenticate.py'
+p4
+sS'code'
+p5
+S"from gluon.storage import Storage\nexec('from applications.%s.modules import gfc_auth as GFCUser' %request.application)\nreload(GFCUser)\n\n#check if the current user is logged in\ndef index():\n        #get the cookie value used to get the viewer\n        if GFCUser.Authenticate(request):\n            #create an auth session entry so that we can use the\n            #SimpleAuth.isLoggedIn method and other decorators\n            #based on gluon.Auth\n            session.logged_in = True\n    \n    return dict(cookie=cookie.value)\n\nresponse._vars=response._caller(index)\n"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/dave/web2py/gluon/restricted.py", line 182, in restricted\n    ccode = compile(code.replace(\'\\r\\n\', \'\\n\'), layer, \'exec\')\n  File "/home/dave/web2py/applications/init/controllers/authenticate.py", line 14\n    return dict(cookie=cookie.value)\n                                   \n^\nIndentationError: unindent does not match any outer indentation level\n'
+p8
+s.

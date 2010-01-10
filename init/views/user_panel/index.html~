@@ -1,0 +1,45 @@
+<div id='user_panel'>
+{{ if auth.isLoggedIn(session): }}
+    {{user = auth.get_user(session)}}
+    name: {{=user.get_name()}}
+    <img src='{{=user.get_thumbnail()}}'/>
+    <a href='javascript:{{=user.get_invite_code()}}'>invite</a>
+    <a href='javascript:{{=user.get_logout_code()}}'>logout</a>
+{{ else: }}
+    <div id='gfc-login'> </div>
+    <script> 
+        $(document).ready(function() 
+        {
+           google.friendconnect.renderSignInButton({ 'id': 'gfc-login', 'style': 'long' });
+        });
+    </script>
+{{ pass }}
+</div>
+
+<script>
+        //get round IE bug
+        $(document).ready(function() 
+        {
+	        //set up gfc for login and logout
+            google.friendconnect.container.initOpenSocialApi
+            ({
+                site: '{{= mixtree_conf.gfc_id }}',
+                onload: function(securityToken) 
+                {
+                    if (!window.timesloaded) 
+                        window.timesloaded = 1;
+                    else
+                        window.timesloaded++;
+        
+                    if (window.timesloaded > 1)
+                    {
+                        //first log user in
+                        $.get("{{= URL(r=request, c= 'authenticate' if not auth.isLoggedIn(session) else 'unauthenticate')}}", 
+			                function() { refreshUserPanel(); }
+                        );
+                        window.timesloaded = null;
+                    }
+                }
+            });
+        });
+</script>

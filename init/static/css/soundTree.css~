@@ -1,0 +1,140 @@
+body
+{
+	background: rgb(200, 255, 200);
+}
+
+div.about
+{
+	clear:both;
+	padding:1em;
+	color: green;
+	background: rgb(240,250,230);
+}
+
+div.trackInfoBox
+{
+	clear:left;
+	padding:1em;
+	background:rgb(170,170,170);
+}
+
+div#searchBox
+{
+	clear:both;
+	padding:1em;
+	background:rgb(170,170,170);
+}
+
+#mixtreeSearchResults
+{
+	width:45em;
+	float:left;
+	display:inline;
+	padding:2em;
+}
+
+#youTubeSearchResults
+{
+	float:left;
+	width:45em;
+	display:inline;
+	padding:2em;
+}
+
+span.fieldName
+{
+	font-weight:bold;
+	color: rgb(220, 255, 220);
+}
+
+span.fieldValue
+{
+	color: rgb(250, 250, 250);
+}
+
+.playlistEntry a
+{
+	font-size:0.9em;
+}
+
+.playlistEntry .title1
+{
+	color: green;
+	font-weight:bold;
+}
+
+.playlistEntry .title2
+{
+	color: rgb(180,180,180);
+}
+
+.playlistEntry .playListControls
+{
+	background:rgb(200,200,200);
+	padding-left: 0.3em;
+	width: 1em;
+	height: 1.1em;
+}
+
+.searchPlaylistEntry .playListControl
+{
+	font-size:1.0em;
+	text-decoration:none;
+}
+
+.playlistEntry .thumbnails
+{
+	height:1.2em;
+	width:1.2em;
+}
+
+.mixListEntry .playListControls
+{
+	background:rgb(200,200,200);
+	padding-left: 0.5em;
+	width: 0.9em;
+	height: 0.9em;
+}
+
+.mixListEntry .playListControl
+{
+	font-size:0.8em;
+	text-decoration:none;
+}
+
+
+.sortingPlaceHolder
+{
+	height: 1.5em; 
+	line-height: 1.2em;
+	background: rgb(150,190,170) !important;
+	border 1 solid rgb(100,140,130) !important;
+}
+
+.mixListContainer
+{
+	height:500px;
+	overflow-y:auto;
+}
+
+.mixListEntry a
+{
+	font-size:0.7em;
+}
+
+.mixListEntry .title1
+{
+	color: green;
+	font-weight:bold;
+}
+
+.mixListEntry .title2
+{
+	color: rgb(180,190,180);
+}
+
+#ytapiplayer
+{
+	height: 100px;
+	width:100px;
+}

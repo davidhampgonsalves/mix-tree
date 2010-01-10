@@ -1,0 +1,6 @@
+{{extend 'layout.html'}}
+<h3>audio</h3>
+{{for a in audio:}}
+	{{=a.artist_name}}
+{{forward}}
+{{backward}}

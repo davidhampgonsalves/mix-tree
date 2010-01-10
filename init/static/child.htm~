@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title> mix list </title>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script language="javascript">			function addMedia(id, type) 
+			{
+				var mediaElement = document.createElement("li");
+				mediaElement.innerHTML = id;
+				$(".playlist").append(mediaElement)
+			} 
+			
+		</script>
+	</head>
+	
+	<body>
+		<ul class='playlist'>
+		</ul>
+	</body>
+</html>

@@ -1,0 +1,16 @@
+{{extend 'layout.html'}}
+<script language="javascript">	function addMedia(id, title1, title2, type) 
+	{
+		var mediaElement = document.createElement("li");
+		if(type == 0)
+		{
+			mediaElement.id = id;
+			mediaElement.innerHTML = title1 + ' ' + title2;
+		}
+		$(".playlist").append(mediaElement);
+	} 
+	
+</script>
+
+<ul class='playlist'> </ul>
+

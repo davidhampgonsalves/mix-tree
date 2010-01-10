@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/dave/web2py/applications/init/controllers/authenticate.py'
+p4
+sS'code'
+p5
+S"from storage import Storage\n\n#check if the current user is logged in\ndef index():\n    #check for the gfc cookie\n    if 'fcauth' + mixtreeConf.gfc_id in request.cookies:\n        #create an auth session entry so that we can use the\n        #Auth.isLoggedIn method and other decorators\n        session.auth = Storage(user='');\n    \n    return dict()\n\nresponse._vars=response._caller(index)\n"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/dave/web2py/gluon/restricted.py", line 184, in restricted\n    exec ccode in environment\n  File "/home/dave/web2py/applications/init/controllers/authenticate.py", line 1, in <module>\n    from storage import Storage\nImportError: No module named storage\n'
+p8
+s.

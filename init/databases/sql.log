@@ -1,0 +1,210 @@
+timestamp: 2009-06-20T09:06:14.668887
+CREATE TABLE auth_user(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	first_name CHAR(128),
+	last_name CHAR(128),
+	email CHAR(128),
+	password CHAR(32),
+	registration_key CHAR(128)
+);
+success!
+timestamp: 2009-06-20T09:06:14.690483
+CREATE TABLE auth_group(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	role CHAR(128),
+	description TEXT
+);
+success!
+timestamp: 2009-06-20T09:06:14.709210
+CREATE TABLE auth_membership(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id REFERENCES auth_user(id) ON DELETE CASCADE,
+	group_id REFERENCES auth_group(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2009-06-20T09:06:14.723990
+CREATE TABLE auth_permission(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	group_id REFERENCES auth_group(id) ON DELETE CASCADE,
+	name CHAR(32),
+	table_name CHAR(32),
+	record_id INTEGER
+);
+success!
+timestamp: 2009-06-20T09:06:14.740507
+CREATE TABLE auth_event(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	time_stamp TIMESTAMP,
+	client_ip CHAR(32),
+	user_id REFERENCES auth_user(id) ON DELETE CASCADE,
+	origin CHAR(32),
+	description TEXT
+);
+success!
+timestamp: 2009-06-20T12:45:55.816922
+CREATE TABLE audio(
+	id INTEGER,
+	id INTEGER,
+	artist_name CHAR(32),
+	track_name TEXT,
+	artist_search_field TEXT,
+	track_search_field TEXT,
+	file_count INTEGER,
+	del CHAR(1)
+);
+timestamp: 2009-06-20T12:46:08.469707
+CREATE TABLE audio(
+	id INTEGER,
+	id INTEGER,
+	artist_name CHAR(32),
+	track_name TEXT,
+	artist_search_field TEXT,
+	track_search_field TEXT,
+	file_count INTEGER,
+	del CHAR(1)
+);
+timestamp: 2009-06-20T12:47:01.972308
+CREATE TABLE audio(
+	id INTEGER,
+	id INTEGER,
+	artist_name CHAR(32),
+	track_name TEXT,
+	artist_search_field TEXT,
+	track_search_field TEXT,
+	file_count INTEGER,
+	del CHAR(1)
+);
+timestamp: 2009-06-20T12:47:07.333862
+CREATE TABLE audio(
+	id INTEGER,
+	id INTEGER,
+	artist_name CHAR(32),
+	track_name TEXT,
+	artist_search_field TEXT,
+	track_search_field TEXT,
+	file_count INTEGER,
+	del CHAR(1)
+);
+timestamp: 2009-06-20T12:47:19.027014
+CREATE TABLE audio(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	artist_name CHAR(32),
+	track_name TEXT,
+	artist_search_field TEXT,
+	track_search_field TEXT,
+	file_count INTEGER,
+	del CHAR(1)
+);
+success!
+timestamp: 2009-06-20T13:43:41.013261
+ALTER TABLE audio ADD deleted CHAR(1);
+success!
+timestamp: 2009-06-21T09:09:40.403800
+CREATE TABLE audio_links(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	audio_id INTEGER,
+	domain CHAR(32),
+	url CHAR(32)
+);
+success!
+timestamp: 2009-07-26T03:20:58.334620
+ALTER TABLE audio ADD remove CHAR(1);
+success!
+timestamp: 2009-07-26T09:42:27.300283
+CREATE TABLE audio(
+	id INT AUTO_INCREMENT NOT NULL,
+	artist_name VARCHAR(32),
+	track_name VARCHAR(32),
+	artist_search_field VARCHAR(32),
+	track_search_field VARCHAR(32),
+	file_count INT,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2009-07-26T09:42:45.570128
+CREATE TABLE audio(
+	id INT AUTO_INCREMENT NOT NULL,
+	artist_name VARCHAR(32),
+	track_name VARCHAR(32),
+	artist_search_field VARCHAR(32),
+	track_search_field VARCHAR(32),
+	file_count INT,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2009-07-26T09:42:48.756687
+CREATE TABLE audio(
+	id INT AUTO_INCREMENT NOT NULL,
+	artist_name VARCHAR(32),
+	track_name VARCHAR(32),
+	artist_search_field VARCHAR(32),
+	track_search_field VARCHAR(32),
+	file_count INT,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2009-07-26T09:43:10.891333
+CREATE TABLE audio(
+	id INT AUTO_INCREMENT NOT NULL,
+	artist_name VARCHAR(32),
+	track_name VARCHAR(32),
+	artist_search_field VARCHAR(32),
+	track_search_field VARCHAR(32),
+	file_count INT,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2009-07-26T10:51:43.080927
+CREATE TABLE audio(
+	id INT AUTO_INCREMENT NOT NULL,
+	artist_name VARCHAR(32),
+	track_name VARCHAR(32),
+	artist_search_field VARCHAR(32),
+	track_search_field VARCHAR(32),
+	file_count INT,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2009-07-26T11:01:57.755203
+CREATE TABLE audio(
+	id INT AUTO_INCREMENT NOT NULL,
+	artist_name VARCHAR(32),
+	track_name VARCHAR(32),
+	artist_search_field VARCHAR(32),
+	track_search_field VARCHAR(32),
+	file_count INT,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2009-07-26T11:02:02.942697
+CREATE TABLE audio(
+	id INT AUTO_INCREMENT NOT NULL,
+	artist_name VARCHAR(32),
+	track_name VARCHAR(32),
+	artist_search_field VARCHAR(32),
+	track_search_field VARCHAR(32),
+	file_count INT,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2009-07-26T11:02:40.403405
+CREATE TABLE audio(
+	id INT AUTO_INCREMENT NOT NULL,
+	artist_name VARCHAR(32),
+	track_name VARCHAR(32),
+	artist_search_field VARCHAR(32),
+	track_search_field VARCHAR(32),
+	file_count INT,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2009-07-26T11:03:22.079959
+CREATE TABLE audio(
+	id INT AUTO_INCREMENT NOT NULL,
+	artist_name VARCHAR(32),
+	track_name VARCHAR(32),
+	artist_search_field VARCHAR(32),
+	track_search_field VARCHAR(32),
+	file_count INT,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+timestamp: 2009-07-26T11:07:52.127760
+CREATE TABLE audio_links(
+	id INT AUTO_INCREMENT NOT NULL,
+	audio_id INT,
+	domain VARCHAR(32),
+	url VARCHAR(32),
+	PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;

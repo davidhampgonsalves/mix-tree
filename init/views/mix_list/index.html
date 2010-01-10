@@ -1,0 +1,15 @@
+{{extend 'layout.html'}}
+<script src="{{= URL(request.application, 'static/scripts', 'mixList.js')}}"></script>
+<script>
+	$(document).ready(function() 
+        {
+		pagePlayer.init();
+	});
+</script>
+<div class='about'>
+	Click on a track to start listening.  You can rearrange tracks by clicking and dragging them.
+</div>
+<div class='mixListContainer'>
+	<ul class='playlist'> </ul>
+</div>
+

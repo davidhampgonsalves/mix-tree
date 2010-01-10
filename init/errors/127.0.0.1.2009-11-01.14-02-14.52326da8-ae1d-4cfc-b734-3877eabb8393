@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/dave/web2py/applications/init/controllers/user_panel.py'
+p4
+sS'code'
+p5
+S'\n#displays the user panel that handles login and user related nav\ndef index():\n    #if logged in then get the user info\n    if auth.is_logged_in() and not session.user_account :\n        #get the user info\n    \n    return dict()        \n\n\nresponse._vars=response._caller(index)\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/dave/web2py/gluon/restricted.py", line 182, in restricted\n    ccode = compile(code.replace(\'\\r\\n\', \'\\n\'), layer, \'exec\')\n  File "/home/dave/web2py/applications/init/controllers/user_panel.py", line 8\n    return dict()\n         ^\nIndentationError: expected an indented block\n'
+p8
+s.

@@ -1,0 +1,17 @@
+from gluon.storage import Storage
+exec('from applications.%s.modules import gfc_auth' %request.application)
+reload(gfc_auth);
+
+#log the current user out
+def index():
+
+    if session.logged_in:
+        session.user = None
+        if session.user:
+            #create an auth session entry so that we can use the
+            #SimpleAuth.isLoggedIn method and other decorators
+            #based on gluon.Auth
+            session.logged_in = True
+    
+    return dict()
+

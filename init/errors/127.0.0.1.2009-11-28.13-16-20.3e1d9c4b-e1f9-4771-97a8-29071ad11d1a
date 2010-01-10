@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/dave/web2py/applications/init/controllers/audio.py'
+p4
+sS'code'
+p5
+S"import gluon.contrib.simplejson as sj\n\nresultsPerPage = 10\n\ndef index(): \n\t'''displays the search and results pertaining to audio'''\n\t#check page number and the criteria\n\tsearchCriteria = None\n\taudio = []\n\tpage = 0\n\tif len(request.args) > 0:\n\t\tsearchCriteria = request.args[0]\n\t\tif len(request.args) == 2:\n\t\t\tpage = int(request.args[1])\n\t\n\t#create search form\n\tformSearch = FORM(INPUT(_name='search', \n\t\t\trequires=[IS_NOT_EMPTY(error_message='you have to enter something to search for'),\n\t\t\tIS_LENGTH(50, error_message='you can\\'t have such a long search term, limit is 50 characters')]),\n\t\t\tINPUT(_type='submit'), _action=URL(request.application, 'audio', 'index'), _method='get')\n\n\t#handle form submits, which are search queries\n\tif formSearch.accepts(request.vars):\n\t\tsearchCriteria = formSearch.vars.search\n\n\t#get approperate records\n\tif searchCriteria != None :\n\t\tif request.env.web2py_runtime_gae:\n\t\t\tpass\t\n\t\telse: \n\t\t\taudioByArtist = db.audio.search_field.like('%'+searchCriteria+'%')\n\t\t\taudio = db(audioByArtist).select(limitby=(page*resultsPerPage, (page+1)*resultsPerPage + 1))\n\n\t#create forward and back links\n\tforward = ''\n\tbackward = ''\n\n\t#not a perfect way to pagnate but its fast\n\tif audio != None and len(audio) == resultsPerPage + 1 : \n\t\tforward = A('>>', _href=URL(r=request, args=[searchCriteria, page+1]))\n\n\t#display back nav if not on 1st pg\n\tif page > 0:\n\t\tbackward = A('<<', _href=URL(r=request, args=[searchCriteria, page-1]))\n\n\treturn dict(form_search=formSearch, audio=audio, forward=forward, backward=backward)\n\ndef search():\n\t'''returns the results in json to an audio search'''\n\tpage = 0\n\tjsonResponse = {}\n\tsearchCriteria = None\n\t\n\tif len(request.args) > 0:\n\t\tsearchCriteria = request.args[0]\n\t\tif len(request.args) == 2:\n\t\t\tpage = int(request.args[1])\n\n\t#get approperate records\n\tif searchCriteria != None :\n\t\taudioByArtistSearch = db.audio.artist.like('%'+searchCriteria+'%')\n\t\taudio = db(audioByArtistSearch).select(limitby=(page*resultsPerPage, (page+1)*resultsPerPage))\n\t\t\n\t\tjsonAudio = []\n\t\tfor a in audio:\n\t\t\tjsonAudio.append( {'id':a.id, 'artist':a.artist_name, 'track':a.track_name} )\n\t\tjsonResponse['audio'] = jsonAudio\n\t\tjsonResponse['page'] = {'forward':'flag', 'back':'flag'}\n\n\treturn sj.dumps(jsonResponse)\n\nresponse._vars=response._caller(search)\n"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/dave/web2py/gluon/restricted.py", line 184, in restricted\n    exec ccode in environment\n  File "/home/dave/web2py/applications/init/controllers/audio.py", line 72, in <module>\n  File "/home/dave/web2py/gluon/globals.py", line 102, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/dave/web2py/applications/init/controllers/audio.py", line 61, in search\n    audioByArtistSearch = db.audio.artist.like(\'%\'+searchCriteria+\'%\')\n  File "/home/dave/web2py/gluon/sql.py", line 1362, in __getattr__\n    return dict.__getitem__(self,key)\nKeyError: \'artist\'\n'
+p8
+s.

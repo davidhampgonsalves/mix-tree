@@ -1,0 +1,25 @@
+{{extend 'layout.html'}}
+<h2>audio</h2>
+<div id='searchBox'>
+    <script>
+        $(function() 
+        {
+            $(".searchButton").click();
+
+        });
+    </script>
+    <form id='youtubeSearchForm' action=''>
+        <input type='text' id='searchInput'/>
+        <input class='youtubeSearchButton' type='submit'/>
+    </form>
+</div>
+<div id='mixtreeSearchResults'>
+    <ul class="playlist">
+    </ul>
+</div>
+<div id='youTubeSearchResults'>
+    <ul class="playlist">   
+    </ul>
+</div>
+{{=backward}}
+{{=forward}}

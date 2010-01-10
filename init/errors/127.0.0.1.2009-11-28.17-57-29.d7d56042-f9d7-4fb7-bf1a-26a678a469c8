@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/dave/web2py/applications/init/views/user_panel/index.html'
+p4
+sS'code'
+p5
+S'response.write("<div id=\'user_panel\'>\\n\\n",escape=False)\nif auth.isLoggedIn(session):\n    response.write(\'\\n\\t\\n    \',escape=False)\n    user = auth.get_user(session)\n    response.write(\'\\n    id: \',escape=False)\n    response.write(user.get_id() )\n    response.write(\'\\n    name: \',escape=False)\n    response.write( user.get_name() )\n    response.write(\'\\n    keys: \',escape=False)\n    response.write( user.getKeys() )\n    response.write(\'\\n\\n\',escape=False)\nelse:\n    response.write("\\n\\n    <script> \\n        $(document).ready(function() \\n        {\\n           google.friendconnect.renderSignInButton({ \'id\': \'gfc-login\', \'style\': \'long\' });\\n        });\\n    </script>\\n    <div id=\'gfc-login\'> </div>\\n\\n",escape=False)\n    pass\nresponse.write(\'\\n\\n</div>\\n\',escape=False)'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/dave/web2py/gluon/restricted.py", line 184, in restricted\n    exec ccode in environment\n  File "/home/dave/web2py/applications/init/views/user_panel/index.html", line 10, in <module>\n    {{ else: }}\nTypeError: getKeys() takes no arguments (1 given)\n'
+p8
+s.

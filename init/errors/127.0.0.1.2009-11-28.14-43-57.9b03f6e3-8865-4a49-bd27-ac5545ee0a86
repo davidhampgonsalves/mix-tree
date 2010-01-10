@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/dave/web2py/applications/init/controllers/audio_links.py'
+p4
+sS'code'
+p5
+S'import gluon.contrib.simplejson as sj\n\n\n\ndef urls_by_id():\n\t# get the audio id from the request\n\tid = request.args[0]\n\n\t# get the audio_links which hold the urls\n\taudioLinksByAudioId = db.audio_links.audio_id == id;\n\taudio_links = db(audioLinksByAudioId).select()\n\turls = []\n\n\tfor audio_link in audio_links:\n\t\turls.append(audio_link.url)\n\n\treturn sj.dumps(urls)\n\n\nresponse._vars=response._caller(urls_by_id)\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/dave/web2py/gluon/restricted.py", line 184, in restricted\n    exec ccode in environment\n  File "/home/dave/web2py/applications/init/controllers/audio_links.py", line 20, in <module>\n  File "/home/dave/web2py/gluon/globals.py", line 102, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/dave/web2py/applications/init/controllers/audio_links.py", line 11, in urls_by_id\n    audio_links = db(audioLinksByAudioId).select()\n  File "/home/dave/web2py/gluon/sql.py", line 2739, in select\n    r = response(query)\n  File "/home/dave/web2py/gluon/sql.py", line 2734, in response\n    self._db._execute(query)\n  File "/home/dave/web2py/gluon/sql.py", line 805, in <lambda>\n    self._execute = lambda *a, **b: self._cursor.execute(*a, **b)\n  File "/usr/lib/pymodules/python2.6/MySQLdb/cursors.py", line 166, in execute\n    self.errorhandler(self, exc, value)\n  File "/usr/lib/pymodules/python2.6/MySQLdb/connections.py", line 35, in defaulterrorhandler\n    raise errorclass, errorvalue\nOperationalError: (1054, "Unknown column \'audio_links.id\' in \'field list\'")\n'
+p8
+s.

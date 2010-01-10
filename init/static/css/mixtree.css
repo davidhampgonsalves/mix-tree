@@ -1,0 +1,157 @@
+* {margin:0;padding:0}
+
+body
+{
+    min-width:640px;
+    background:green;
+}
+
+#header, #main, #spacer
+{
+    overflow:hidden;
+    display:inline-block;
+    width:100%;
+}
+
+#header
+{
+    background:rgb(100, 180, 100);
+}
+
+#spacer
+{
+    height:0.2em;
+    background:white;
+}
+
+#main
+{
+    background:rgb(230, 255, 230);
+}
+
+#user_panel
+{
+    float:right;
+}
+
+#logo
+{
+    float:left;
+    width:10em;
+    font-family: arial;
+    background:green;
+}
+
+#subLogo1
+{
+    
+    font-weight: bold;
+    font-size: 3.7em;
+    letter-spacing:-0.1em;
+    color:rgb(0,70,0);
+    text-decoration:none;
+}
+
+#searchBox
+{
+    padding:0.5em;
+	background:rgb(100,180,100);
+    clear:right;
+}
+
+#mixtreeSearchResults, #youTubeSearchResults
+{
+    margin-top:0.5em;
+	width:47%;
+}
+
+#mixtreeSearchResults
+{
+    margin-left:1%;
+    float:left;
+}
+
+#youTubeSearchResults
+{
+    margin-right:1%;
+    float:right;
+}
+
+div.about
+{
+	clear:both;
+	padding:1em;
+	color: green;
+	background: rgb(240,250,230);
+}
+
+div.trackInfoBox
+{
+	clear:left;
+	padding:1em;
+	background:rgb(170,170,170);
+}
+
+.playlistEntry a
+{
+	font-size:0.9em;
+}
+
+.playlistEntry .title1, .mixListEntry .title1
+{
+    color:green;
+	font-weight:bold;
+    padding-left:2em;
+}
+
+.playlistEntry .title2, .mixListEntry .title2
+{
+	color: rgb(110,110,110);
+    padding-left:0.5em;
+}
+
+.playlistEntry .playListControls
+{
+	background:rgb(220,240,210);
+	padding-left: 0.3em;
+	width: 1em;
+	height: 1.1em;
+}
+
+.playlistEntry .thumbnails
+{
+	height:1.2em;
+	width:1.2em;
+}
+
+li.youtube
+{
+    background:#D2B48C !important;
+}
+
+.mixListEntry .playListControl
+{
+	background:rgb(200,200,200);
+	padding-left: 0.5em;
+	width: 1.3em;
+	height: 1.3em;
+}
+
+ul.playlist li:hover 
+{
+ background-color:rgb(200,200,200);
+}
+
+/* + or - when hovered */
+ul.playlist li:hover a 
+{
+ color:grey;
+}
+
+#ytFrame
+{   
+
+}
+
+
+

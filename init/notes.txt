@@ -1,0 +1,3 @@
+To handle authentication via google friend connect and facebook connect I think the best option would be to create a class similiar to the web2py class auth(defined in the gluon.tools.py file).  This would allow me to then decorate (@anotate) my controlers to handle security (ie: @authenticated).
+
+The decorator should then pass the controler an instance of my auth class which should be either for gfc, fc etc.
