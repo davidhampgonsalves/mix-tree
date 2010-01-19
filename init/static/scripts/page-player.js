@@ -97,6 +97,7 @@ function PagePlayer(oConfigOverride) {
   this.oControls = null;
   //sound tree addition
   this.idRegEx = new RegExp(/^[0-9]+$/);
+  this.eventsConnected = false;
   //end of addition
 
   this.addEventHandler = function(o,evtName,evtHandler) {
@@ -447,6 +448,7 @@ function PagePlayer(oConfigOverride) {
       if (!pl.config.allowRightClick) pl.stopEvent(e);
       return (pl.config.allowRightClick); // ignore right-clicks
     }
+
     var o = self.getTheDamnTarget(e);
     if (self.dragActive) self.stopDrag(); // to be safe
     if (self.withinStatusBar(o)) {
@@ -471,12 +473,12 @@ function PagePlayer(oConfigOverride) {
     }
 
     if(!self.hasClass(o,'playable'))
-	return false;
+		return false;
 
     if(self.lastLink)
     {
-	ytWrapper.resetStateClasses(self.lastLink);
-	self.lastLink = null;
+		ytWrapper.resetStateClasses(self.lastLink);
+		self.lastLink = null;
     }
 
     if(self.hasClass(o,'youtube'))
@@ -487,13 +489,13 @@ function PagePlayer(oConfigOverride) {
 	        self.stopSound(self.lastSound);
 
         //let the YouTubeWrapper handle the click
-        ytWrapper.handleClick(o);
+        ytWrapper._handleClick(o);
         
         self.lastLink = o;
 	    return self.stopEvent(e);
     }else if(ytWrapper)
 	    //stop the yt player this click was for a sound manager link
-	    ytWrapper.unload();
+	    ytWrapper._unload();
     //sound tree
     var thisSound = self.getSoundByObject(o);
     if (thisSound) {
@@ -938,8 +940,15 @@ function PagePlayer(oConfigOverride) {
 		}	
   }
 
-  this.init = function() {
+  this.connectEvents = function()
+  {
+    self.addEventHandler(document,'click',self.handleClick);
+    self.addEventHandler(document,'mousedown',self.handleMouseDown);
+    self.addEventHandler(document,'mouseup',self.stopDrag);
+    self.addEventHandler(window,'unload',function(){}); // force page reload when returning here via back button (Opera tries to remember old state, etc.)
+  }
 
+  this.init = function() {
     sm._writeDebug('pagePlayer.init()');
     var oLinks = document.getElementsByTagName('a');
 
@@ -971,11 +980,12 @@ function PagePlayer(oConfigOverride) {
        oTiming.innerHTML = '';
        oTiming.id = '';
     }
-
-    self.addEventHandler(document,'click',self.handleClick);
-    self.addEventHandler(document,'mousedown',self.handleMouseDown);
-    self.addEventHandler(document,'mouseup',self.stopDrag);
-    self.addEventHandler(window,'unload',function(){}); // force page reload when returning here via back button (Opera tries to remember old state, etc.)
+	
+	if(!this.eventsConnected)
+	{	
+		this.connectEvents();
+		this.eventsConnected = true;
+	}
 
     sm._writeDebug('pagePlayer.init(): Found '+foundItems+' relevant items.');
     if (self.config.autoStart) {
@@ -1117,7 +1127,7 @@ var pagePlayer = new PagePlayer(typeof PP_CONFIG != 'undefined'?PP_CONFIG:null);
 
 soundManager.onready(function() {
   if (soundManager.supported()) {
-    // soundManager.createSound() etc. may now be called
+	// soundManager.createSound() etc. may now be called
     pagePlayer.initDOM();
   }
 });

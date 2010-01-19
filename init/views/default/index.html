@@ -1,33 +1,23 @@
 {{extend 'layout.html'}}
-<div id ='main'>
-    <div id='searchBox'>
-        <script>
-	    //document ready
-            $(document).ready(function() 
-            {
-            	$("#searchButton").click(
-			    function()
-			    {
-				    var searchInput = $("#searchInput");
-				    if(searchInput && searchInput.attr('value') != '')
-					    searchAll(searchInput.attr('value'));
-				    return false;	
-			    }
-		    );		
-            });
-	
-        </script>
-        search: {{=formSearch}}
-    </div>
-    <div id='mixtreeSearchResults'>
-        <ul class="playlist">
-        </ul>
-        <div class='pagnation'></div>
-    </div>
-    <div id='youTubeSearchResults'>
-        <ul class="playlist">   
-        </ul>
-        <div class='pagnation'></div>
-    </div>
+<div id='searchBox'>
+	<script type="text/javascript">
+		function search()
+		{
+			var searchInput = $("#searchInput");
+			if(searchInput && searchInput.attr('value') != '')
+				searchAll(searchInput.attr('value'));
+			return false;	
+		}
+	</script>	
+    search: {{=formSearch}}
 </div>
+<div id='mixtreeSearchResults'>
+    <ul class="playlist"> </ul>
+	<div class='pagnation'> </div>
+</div>
+<div id='youTubeSearchResults'>
+    <ul class="playlist"> </ul>
+    <div class='pagnation'> </div>
+</div>
+
 

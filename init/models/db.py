@@ -17,7 +17,7 @@ if request.env.web2py_runtime_gae: # if running on Google App Engine
 else: # else use a normal relational database
     # if not, use SQLite or other DB
     #db = SQLDB('sqlite://storage.sqlite')
-    db = SQLDB('mysql://mixtree:conflic1@192.168.1.101/mixtree')
+    db = SQLDB('mysql://mixtree:conflict@localhost/mixtree')
 
 #########################################################################
 ## uncomment the following line if you do not want sessions

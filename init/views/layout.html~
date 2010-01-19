@@ -12,23 +12,19 @@
 	
 	
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="{{= URL(request.application, 'static/scripts', 'soundmanager2-nodebug-jsmin.js')}}"></script>
+	<script type="text/javascript" src="{{= URL(request.application, 'static/scripts', 'soundmanager2.js')}}"></script>
 	
-	<!-- load libraries from google -->
 	<script type="text/javascript"> 
+		//load api's and libs from google
 		google.load("jquery", "1.3.2");
 		google.load("jqueryui", "1.7.2");
-		//used for embeding the youtube player
 		google.load("swfobject", "2.2");		
    		google.load('friendconnect', '0.8');
-    </script>
     
-    <!-- init page objects -->
-    <script type="text/javascript">
         //sound manager set up
 		soundManager.url = "{{= URL(request.application, 'static', 'swf/')}}";
-		soundManager.useHighPerformance = true; // keep flash on screen, boost performance
-		soundManager.useFastPolling = true; // increased JS callback frequency
+		soundManager.useHighPerformance = false; // keep flash on screen, boost performance
+		soundManager.useFastPolling = false; // increased JS callback frequency
 		
 		var PP_CONFIG = 
 		{
@@ -53,16 +49,17 @@
 	<link rel="stylesheet" type="text/css" href="{{=URL(request.application,'static','css/mixtree.css')}}" />
   </head>
   <body>
-
+    <div id='header'>	
+        {{include 'user_panel/index.html'}}
+        <div id='logo'>
+                {{=A('mixtree', _href=URL(r=request, args=[]), _id='subLogo1')}}
+        </div>
+    </div>
 	<div id='spacer'></div>
 
     <div id='main'>
         {{include}}
     </div>
-
-    <a href='#' onclick='onytplayerStateChange(0)'>next</a>
-  
-  
   
 <!-- sound manager stuff -->
  <div id="control-template">

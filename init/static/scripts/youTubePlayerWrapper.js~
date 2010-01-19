@@ -17,52 +17,59 @@ function youTubePlayerWrapper()
 	}
 	this.defaultClasses = "playlistEntry " + this.css.norm;
 
-	this.init = function()
+	this._init = function()
 	{
-		//this.player = document.getElementById("ytplayer");
-		//this.player = $("#ytplayer").get(0);
-        var tem = $("#ytplayer");
-        if(tem.length == 0)
-        {
-            $("body").append("<div id='ytFrame'><div id='ytapiplayer'>You need Flash player 8+ and JavaScript enabled to view this video.</div><div id='ytplayerControls'><a href='#' id='enlarge' onclick='ytWrapper.toggleEnlarge()'>+/-</a></div></div>");
-            var params = { allowScriptAccess: "always" };
-            var atts = { id: "ytplayer" };
-            swfobject.embedSWF("http://www.youtube.com/apiplayer?enablejsapi=1&playerapiid=ytplayer", 
-                       "ytapiplayer", "150", "100", "8", null, null, params, atts);
-             this.player = $("#ytplayer").get(0);
-        }else 
-            this.player = tem.get(0);       
-   	}
+		if(!this.player)
+		{
+			this.parentLi = this.curPlayingLink.parent();
+			this.parentLi.append("<div id='ytFrame'><div id='ytapiplayer'>You need Flash player 8+ and JavaScript enabled to view this video.</div><div id='ytplayerControls'><a href='#' id='enlarge' onclick='ytWrapper.toggleEnlarge()'>+/-</a></div></div>");
+		    var params = { allowScriptAccess: "always" };
+		    var atts = { id: "ytplayer" };
+		    swfobject.embedSWF("http://www.youtube.com/apiplayer?enablejsapi=1&playerapiid=ytplayer", 
+		               "ytapiplayer", "150", "100", "8", null, null, params, atts);
+		}
+	}
+
+	this._initHandle = function()
+	{
+		this.player = $("#ytplayer").get(0);
+	}
 
     //returns if the player is currently on in the dom
     this.isPlayerPresent = function()
     {
-        if(!this.player || $("#ytplayer").length == 0)
+        if(!this.player)
             return false;
         else
             return true;
     }    
 
     //handles a click on a youtube link
-    this.handleClick = function(o)
+    this._handleClick = function(o)
     {
-        if(! this.isPlayerPresent())
-        {     
-            this.init();
+        if(!this.isPlayerPresent())
+        {
+			//if there is no player so far then set the video up to be played and init new player
             this.playVideoAfterReload(o);
+            this._init();
         }else
         {
             var curTrack = this.player.getVideoUrl();
             var state = this.player.getPlayerState();
             //first check that the youtube link clicked on isn't for a different video or nothing has been loaded
             if(state == -1 || (curTrack && curTrack.indexOf(o.id) == -1))
+			{
+				//stop the current video, set up the next video to play and then init the new player
+				this._stop();
     	        this.playVideoAfterReload(o);
-            //check if this video is already playing
+				this._init();
+			}            
+			//check if this video is already playing
             else if(state == 1)
-           	    this.pause();
+           	    this._pause();
             //finally check if the video is paused or stopped
             else if(state == 2 || state == 5)
-    	        this.play();
+    	        this._play();
         }
     }
 
@@ -70,20 +77,21 @@ function youTubePlayerWrapper()
     //and once the ytplayer re inits it will play the video
 	this.playVideoAfterReload = function(o)
 	{
+		//clear the player handle so it will get reattached to the new player
+		this.player = undefined;
+		//set the current playing link that will get started after the player loads
 		this.curPlayingLink = $(o);
-		this.parentLi = this.curPlayingLink.parent();
-        this.parentLi.append($("#ytFrame"));
 	}
 
     //queues the video and plays
     this.queueAndPlayCurrent = function()
     {
         this.player.cueVideoById(this.curPlayingLink.attr('id'), 0);
-        this.play();
+        this._play();
     }
 
     //plays the currently cueued video and preforms class manipulations to show that the video is playing
-	this.play = function()
+	this._play = function()
 	{
         this.player.playVideo();
 		this.resetStateClasses();
@@ -99,28 +107,28 @@ function youTubePlayerWrapper()
             return false;
     }
 
-	this.pause = function()
+	this._pause = function()
 	{
 		this.resetStateClasses();
 		this.parentLi.addClass(this.css.paused);
 		this.player.pauseVideo();
 	}
 
-	this.stop = function()
+	this._stop = function()
 	{
 		this.resetStateClasses();
 		this.player.stopVideo();
-        this.player = false;
+        this.player = undefined;
         $("#ytFrame").remove();
 	}
 
-	this.unload = function()
+	this._unload = function()
 	{
         if(this.isPlayerPresent())
     	    if(this.player.getPlayerState() != 5)
             {
                 this.player.clearVideo();	
-    	    	this.stop();
+    	    	this._stop();
             }
 	}
 
@@ -138,7 +146,7 @@ function youTubePlayerWrapper()
 		}
 	}
 
-    //enlarder
+    //enlarges or minimizes the ytplayer window
     this.toggleEnlarge = function()
     {
         var player = $("#ytplayer");
@@ -164,10 +172,13 @@ var ytWrapper = new youTubePlayerWrapper();
 //the player being destroyed durring dom manipulations
 function onYouTubePlayerReady(playerId) 
 {
-    //ytWrapper.init();
-    ytWrapper.player.addEventListener("onStateChange", "onytplayerStateChange");
     if(ytWrapper.isReadyToPlay())
-       ytWrapper.queueAndPlayCurrent()    
+    {
+		ytWrapper._initHandle();
+        ytWrapper.queueAndPlayCurrent();
+    	ytWrapper.player.addEventListener("onStateChange", "onytplayerStateChange");
+    }
+
 }
 
 function onytplayerStateChange(state) 
@@ -181,11 +192,11 @@ function onytplayerStateChange(state)
 		if(nextLi.length > 0)
 		{
 			//stop current song
-			ytWrapper.stop();
+			ytWrapper._stop();
 			var next = nextLi.children("a").filter(".playable").get(0);
-			//next song
+			//play next song
 			pagePlayer.handleClick({target:next});
 		}else
-			ytWrapper.stop();
+			ytWrapper._stop();
 	}
 }

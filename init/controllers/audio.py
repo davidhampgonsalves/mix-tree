@@ -18,7 +18,8 @@ def search():
         #this is a gae hack because there isn't any full text string search
         if request.env.web2py_runtime_gae:        
             audio_by_artist = db.Audio.artist == search_criteria
-            #audio = db.executesql('SELECT * FROM Audio WHERE prop >= ' +  search_criteria + ' AND prop < ' + (unicode(search_criteria) + u"\ufffd"))
+	    #audio = db.executesql("")
+            #audio = db.executesql("SELECT artist FROM Audio WHERE prop >= '" +  search_criteria + "' AND prop < '" + (unicode(search_criteria) + u"\ufffd") + "'")
         else:
             audio_by_artist = db.Audio.artist.like('%'+search_criteria+'%')
             
